@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Perfil</title>
+    <style>
+        body {
+            background: #f5f6fa;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 32px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            min-width: 320px;
+            text-align: center;
+        }
+        h2 {
+            color: #273c75;
+            margin-bottom: 24px;
+        }
+        p {
+            color: #353b48;
+            font-size: 16px;
+            margin-bottom: 14px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 10px 28px;
+            background: #4078c0;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+        a:hover {
+            background: #274472;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Perfil do Usuário</h2>
+        <p><strong>Nome:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+
+        <a href="/logout">Sair</a>
+    </div>
+</body>
+</html>

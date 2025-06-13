@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <div class="header-row">
+    <div>
+        <a href="/profile" title="Perfil" class = "profile-icon">👤</a>
+    </div>
+    </div>
+    <title>Gerenciamento de Membros</title>
+    <style>
+       body { background: #f5f6fa; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; }
+        .main-container { max-width: 900px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 32px 40px; }
+        h2 { color: #273c75; margin-bottom: 24px; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+        .header-actions { display: flex; align-items: center; gap: 18px; }
+        .profile-icon {
+            font-size: 24px;
+            text-decoration: none;
+            color: #4078c0;
+            background: #f5f6fa;
+            border-radius: 50%;
+            padding: 8px 10px;
+            transition: background 0.2s, color 0.2s;
+            margin-left: 10px;
+        }
+        .profile-icon:hover {
+            background: #4078c0;
+            color: #fff;
+        }
+        .add-btn { background: #4078c0; color: #fff; border: none; border-radius: 6px; padding: 10px 22px; font-size: 15px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+        .add-btn:hover { background: #274472; }
+        table { width: 100%; border-collapse: collapse; background: #fff; }
+        th, td { padding: 12px 10px; border-bottom: 1px solid #e1e1e1; text-align: left; }
+        th { color: #4078c0; font-weight: 600; background: #f5f6fa; }
+        .actions { display: flex; gap: 8px; }
+        .action-btn { border: none; border-radius: 5px; padding: 7px 14px; font-size: 14px; font-weight: bold; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; gap: 4px; }
+        .edit-btn { background: #fbc531; color: #fff; }
+        .edit-btn:hover { background: #e1a32a; }
+        .delete-btn { background: #e84118; color: #fff; }
+        .delete-btn:hover { background: #c23616; }
+        .empty-row { text-align: center; color: #888; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="header-row">
+            <h2>Gerenciamento de Membros</h2>
+            <a href="/adicionar_membro" class="add-btn">+ Adicionar Membro</a>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Data de Adição</th>
+                    <th>Adicionado por</th>
+                    <th>Cargo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if membros %}
+                    {% for membro in membros %}
+                    <tr>
+                        <td>{{ membro.nome }}</td>
+                        <td>{{ membro.data_adicao }}</td>
+                        <td>{{ membro.adicionado_por }}</td>
+                        <td>{{ membro.cargo }}</td>
+                        <td class="actions">
+                            <a href="/editar_membro/{{ membro.id }}" class="action-btn edit-btn" title="Editar">&#9998; Editar</a>
+                            <form action="/remover_membro/{{ membro.id }}" method="POST" style="display:inline;">
+                                <button type="submit" class="action-btn delete-btn" title="Remover" onclick="return confirm('Tem certeza que deseja remover este membro?')">&#128465; Remover</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="empty-row">Nenhum membro cadastrado.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
